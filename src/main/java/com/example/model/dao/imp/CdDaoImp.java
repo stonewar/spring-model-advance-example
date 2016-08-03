@@ -1,4 +1,4 @@
-package ch.example.testmodel.dao.imp;
+package com.example.model.dao.imp;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -6,8 +6,8 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import ch.example.testmodel.dao.CdRepository;
-import ch.example.testmodel.model.Cd;
+import com.example.model.Cd;
+import com.example.model.dao.CdDao;
 
 /**
  * 
@@ -16,7 +16,7 @@ import ch.example.testmodel.model.Cd;
  */
 @Repository
 //@Transactional
-public class CdRepositoryImp implements CdRepository {
+public class CdDaoImp implements CdDao {
     
 	@PersistenceContext
 	private EntityManager em;

@@ -1,25 +1,25 @@
-package ch.example.testmodel;
+package com.example.model.test;
 
 import static org.junit.Assert.*;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ch.example.testmodel.model.Cd;
-import ch.example.testmodel.repository.CdRespository;
+import com.example.model.Cd;
+import com.example.model.config.ModelConfig;
 
+import ch.example.model.repository.CdRespository;
 /**
  * 
  * @author yandypiedra
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring-config.xml")
-public class XmlConfigTest {
+@ContextConfiguration(classes=ModelConfig.class)
+public class ModelConfigTest {
 
 	@Autowired
 	CdRespository repo;
@@ -37,4 +37,5 @@ public class XmlConfigTest {
 		Cd foundCd = repo.findOne(cd.getId());
 		assertEquals(cd.getName(), foundCd.getName());
 	}
+
 }

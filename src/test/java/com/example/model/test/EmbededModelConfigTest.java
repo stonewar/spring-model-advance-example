@@ -1,4 +1,4 @@
-package ch.example.testmodel;
+package com.example.model.test;
 
 import junit.framework.Assert;
 
@@ -9,8 +9,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import ch.example.testmodel.dao.CdRepository;
-import ch.example.testmodel.model.Cd;
+import com.example.model.Cd;
+import com.example.model.config.EmbededModelConfig;
+import com.example.model.dao.CdDao;
 
 /**
  * 
@@ -18,11 +19,11 @@ import ch.example.testmodel.model.Cd;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes=EmbededJpaConfig.class)
-public class EmbededJpaConfigTest {
+@ContextConfiguration(classes=EmbededModelConfig.class)
+public class EmbededModelConfigTest {
 
 	@Autowired
-	private CdRepository rep;
+	private CdDao rep;
 	
 	@Test
 	public void isInitialized(){

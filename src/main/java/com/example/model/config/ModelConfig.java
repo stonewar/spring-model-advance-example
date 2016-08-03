@@ -1,4 +1,4 @@
-package ch.example.testmodel;
+package com.example.model.config;
 
 import java.util.Properties;
 import javax.inject.Inject;
@@ -29,7 +29,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 //Spring Data JPA by default looks for an EntityManagerFactory named entityManagerFactory
 @Configuration
 @EnableJpaRepositories(basePackages="ch.example.testmodel.repository", entityManagerFactoryRef="containerEntityManagerFactoryBean")
-public class TestModelConfig {
+public class ModelConfig {
 	
 	@Bean
 	public DataSource dataSource(){

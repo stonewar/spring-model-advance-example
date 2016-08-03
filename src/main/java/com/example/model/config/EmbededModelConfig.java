@@ -1,4 +1,4 @@
-package ch.example.testmodel;
+package com.example.model.config;
 
 import java.util.Properties;
 
@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @ComponentScan(basePackages="ch.example.testmodel.dao.imp")
 //@EnableTransactionManagement
-public class EmbededJpaConfig {
+public class EmbededModelConfig {
 	
 	@Bean
 	public DataSource dataSource(){
