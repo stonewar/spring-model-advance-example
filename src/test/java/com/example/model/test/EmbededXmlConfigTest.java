@@ -1,8 +1,10 @@
 package com.example.model.test;
 
-import static org.junit.Assert.*;
-import junit.framework.Assert;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +27,10 @@ public class EmbededXmlConfigTest {
 	@Autowired
 	private CdDao rep;
 	
+	@Before
 	@Test
 	public void isInitialized(){
-		Assert.assertNotNull(rep);
+		assertNotNull(rep);
 	}
 	
 	@Test
@@ -36,9 +39,8 @@ public class EmbededXmlConfigTest {
 		Cd cd1 = new Cd();
 		cd1.setName("Spring Spring");
 		rep.save(cd1);
-		
 		Cd foundCd = rep.findCd(cd1.getId());
-		Assert.assertEquals(cd1.getName(), foundCd.getName());
+		assertEquals(cd1.getName(), foundCd.getName());
 	}
 
 }

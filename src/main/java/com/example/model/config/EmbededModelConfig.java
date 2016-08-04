@@ -30,7 +30,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  *
  */
 @Configuration
-@ComponentScan(basePackages="ch.example.testmodel.dao.imp")
+@ComponentScan(basePackages="com.example.model.dao.imp")
 //@EnableTransactionManagement
 public class EmbededModelConfig {
 	
@@ -68,7 +68,7 @@ public class EmbededModelConfig {
 //		emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 		emf.setJpaVendorAdapter(adapter());
 //		emf.setJpaProperties(jpaProperties());
-		emf.setPackagesToScan(new String[]{ "ch.example.testmodel.model" });
+		emf.setPackagesToScan(new String[]{ "com.example.model" });
 		return emf;
 	}
 	

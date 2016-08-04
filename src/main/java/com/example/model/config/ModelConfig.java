@@ -1,7 +1,4 @@
 package com.example.model.config;
-
-import java.util.Properties;
-import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +16,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * 
@@ -26,23 +24,28 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
  *
  */
 
-//Spring Data JPA by default looks for an EntityManagerFactory named entityManagerFactory
+//Spring Data JPA looks by default for an EntityManagerFactory with id entityManagerFactory
 @Configuration
-@EnableJpaRepositories(basePackages="ch.example.testmodel.repository", entityManagerFactoryRef="containerEntityManagerFactoryBean")
+@PropertySource("classpath:properties/db.properties")
+@EnableJpaRepositories(basePackages="com.example.model.repository", entityManagerFactoryRef="containerEntityManagerFactoryBean")
 public class ModelConfig {
+	
+	//TODO injection is not working!
+	@Autowired
+	private Environment env;
 	
 	@Bean
 	public DataSource dataSource(){
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/test");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/CD");
 		dataSource.setUsername("root");
 		dataSource.setPassword("");
 		return dataSource;
 	}
 	
 	@Bean
-	public JpaVendorAdapter jpaAdapter(){
+	public JpaVendorAdapter jpaVendorAdapter(){
 		HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
 		adapter.setDatabase(Database.MYSQL);
 		adapter.setShowSql(true);
@@ -54,16 +57,16 @@ public class ModelConfig {
 	public LocalContainerEntityManagerFactoryBean containerEntityManagerFactoryBean(){
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 		emf.setDataSource(dataSource());
-		emf.setJpaVendorAdapter(jpaAdapter());
+		emf.setJpaVendorAdapter(jpaVendorAdapter());
 //		emf.setJpaProperties(properties());
-		emf.setPackagesToScan(new String[]{ "ch.example.testmodel.model" });
+		emf.setPackagesToScan(new String[]{ "com.example.model" });
 		return emf;
 	}
 	
 	@Bean
-    public JpaTransactionManager transactionManager() {
+    public JpaTransactionManager transactionManager(LocalContainerEntityManagerFactoryBean entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(containerEntityManagerFactoryBean().getObject());
+        transactionManager.setEntityManagerFactory(entityManagerFactory.getObject());
         return transactionManager;
     }
  

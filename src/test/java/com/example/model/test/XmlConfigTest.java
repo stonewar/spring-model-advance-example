@@ -2,6 +2,7 @@ package com.example.model.test;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,8 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.example.model.Cd;
-
-import ch.example.model.repository.CdRespository;
+import com.example.model.repository.CdRespository;
 
 /**
  * 
@@ -26,6 +26,7 @@ public class XmlConfigTest {
 	CdRespository repo;
 	
 	@Test
+	@Before
 	public void isCdRespositoryNotNull() {
 		assertNotNull(repo);
 	}
